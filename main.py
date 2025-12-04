@@ -1,15 +1,22 @@
 import time
 import numpy as np
-import utils  # Κάνουμε import το δικό σου αρχείο
+import utils
 from keras.datasets import cifar10
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
 
 print("\nLoading CIFAR-10 dataset...")
 (x_train_full, y_train_full), (x_test, y_test) = cifar10.load_data()
+
+print("Reducing training set to 5000 samples...")
+x_train_full, _, y_train_full, _ = train_test_split(
+    x_train_full, y_train_full, train_size=5000, stratify=y_train_full, random_state=42
+)
+
 y_train = y_train_full.ravel()
 y_test = y_test.ravel()
 
@@ -70,16 +77,16 @@ def train_and_evaluate(model, model_name, filename):
     return test_acc
 
 # SVM RBF
-svm_rbf = SVC(kernel='rbf', C=10, gamma='scale', cache_size=1000, verbose=True)
+svm_rbf = SVC(kernel='rbf', C=10, gamma='scale', cache_size=1000)
 train_and_evaluate(svm_rbf, "SVM (RBF Kernel)", "svm_rbf_cifar10.pkl")
 
 # SVM Linear
-svm_linear = SVC(kernel='linear', C=1, cache_size=1000, verbose=True)
+svm_linear = SVC(kernel='linear', C=1, cache_size=1000)
 train_and_evaluate(svm_linear, "SVM (Linear Kernel)", "svm_linear_cifar10.pkl")
 
 # MLP
 mlp = MLPClassifier(hidden_layer_sizes=(256,), activation='relu', solver='adam', 
-                    max_iter=300, random_state=42, verbose=True)
+                    max_iter=300, random_state=42)
 train_and_evaluate(mlp, "MLP (1 Hidden Layer)", "mlp_cifar10.pkl")
 
 print("\nThe process is complete")
