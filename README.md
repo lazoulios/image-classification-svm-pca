@@ -32,8 +32,9 @@ The project uses Python 3.x and relies on the following major libraries:
 
 Clone the repository and set up a virtual environment:
 
+```bash
 # Clone the repository
-git clone [https://github.com/lazoulios/neural-network-image-recognition](https://github.com/lazoulios/neural-network-image-recognition)
+git clone [https://github.com/lazoulios/neural-network-image-recognition]
 cd neural-network-image-recognition
 
 # Create and activate the virtual environment
@@ -42,8 +43,9 @@ source venv/bin/activate  # Use venv\Scripts\Activate.ps1 on Windows PowerShell
 
 # Install dependencies from requirements.txt
 pip install -r requirements.txt
+```
 
-### 3. Running the Models
+### 3\. Running the Models
 
 The repository contains two main scripts. Both scripts use a **"Load or Fit"** logic: they check if the trained model exists in the `models/` folder; if so, they load it instantly; otherwise, they train it from scratch and save the model.
 
@@ -74,9 +76,3 @@ python visualize.py
   * `tex/`: Source code for the LaTeX report.
   * `report.pdf`: The final compiled project report.
   * `requirements.txt`: List of all required Python packages.
-
-
-## 👤 Author
-
-**Georgios Lazaridis**
-Aristotle University of Thessaloniki
